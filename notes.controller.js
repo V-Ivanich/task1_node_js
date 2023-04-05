@@ -36,8 +36,8 @@ async function printNotes() {
 }
 
 async function removeNote(id) {
-  const notes = await fs.readFile(notesPath, { encoding: 'utf-8' })
-  const newNotes = JSON.parse(notes).filter((n) => n.id !== id)
+  const notes = await getNotes()
+  const newNotes = notes.filter((n) => n.id !== id)
   await fs.writeFile(notesPath, JSON.stringify(newNotes))
 }
 
