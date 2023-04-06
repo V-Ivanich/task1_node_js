@@ -37,12 +37,15 @@ async function printNotes() {
 
 async function removeNote(id) {
   const notes = await getNotes()
-  const newNotes = notes.filter((n) => n.id !== id)
-  await fs.writeFile(notesPath, JSON.stringify(newNotes))
+
+  const filtered = notes.filter((note) => note.id !== id)
+
+  await saveNotes(filtered)
+  console.log(chalk.red(`Note with id="${id}" has been removed.`))
 }
 
 module.exports = {
   addNote,
-  printNotes,
+  getNotes,
   removeNote,
 }
