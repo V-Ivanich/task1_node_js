@@ -10,6 +10,7 @@ app.set('view engine', 'ejs')
 app.set('views', 'pages')
 
 app.use(express.static(path.resolve(__dirname, 'public')))
+app.use(express.json())
 app.use(
   express.urlencoded({
     extended: true,
@@ -39,6 +40,14 @@ app.delete('/:id', async (req, res) => {
     title: 'Express App',
     notes: await getNotes(),
     created: false,
+  })
+})
+
+app.put('/:id', async (req, res) => {
+  res.render('index', {
+    title: 'Express App',
+    notes: await getNotes(),
+    created: true,
   })
 })
 
