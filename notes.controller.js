@@ -44,8 +44,13 @@ async function removeNote(id) {
   console.log(chalk.red(`Note with id="${id}" has been removed.`))
 }
 
+async function upDateNote(id) {
+  console.log(id, body)
+}
+
 module.exports = {
   addNote,
   getNotes,
   removeNote,
+  upDateNote,
 }

@@ -7,7 +7,11 @@ document.addEventListener('click', (e) => {
       })
     case 'edit':
       const editId = e.target.dataset.id
-      const result = prompt('Введите новое название', 'Edits text')
+
+      const result = prompt(
+        'Введите новое название',
+        e.target.closest('li').dataset.data,
+      )
       if (result === null || !result) {
         break
       } else {
