@@ -5,18 +5,19 @@ document.addEventListener('click', (e) => {
       remove(id).then(() => {
         e.target.closest('li').remove()
       })
+      break
+
     case 'edit':
       const editId = e.target.dataset.id
-
-      const result = prompt(
-        'Введите новое название',
-        e.target.closest('li').dataset.data,
-      )
+      const elemTitle = document
+        .querySelector(`#title${editId}`)
+        .textContent.trim()
+      const result = prompt('Введите новое название', elemTitle)
       if (result === null || !result) {
         break
       } else {
-        const data = JSON.stringify(result)
-        put(editId, data)
+        document.querySelector(`#title${editId}`).textContent = result
+        put({ id: editId, data: result })
       }
   }
 })
@@ -26,5 +27,11 @@ async function remove(id) {
 }
 
 async function put(id, data) {
-  await fetch(`/${id}`, { method: 'PUT', body: data })
+  await fetch('/', {
+    method: 'PUT',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({ id, data }),
+  })
 }

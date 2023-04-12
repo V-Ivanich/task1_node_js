@@ -48,8 +48,9 @@ app.delete('/:id', async (req, res) => {
   })
 })
 
-app.put('/:id', async (req, res) => {
-  await upDateNote(req.params.id)
+app.put('/', async (req, res) => {
+  console.log(req.body.id.data)
+  await upDateNote(req.body.id)
   res.render('index', {
     title: 'Express App',
     notes: await getNotes(),
